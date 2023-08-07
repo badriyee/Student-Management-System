@@ -1,0 +1,5 @@
+<users><account><username>Badri</username><password>1234</password></account><account><username>Badri</username><password>1234</password></account></users>badri david,23 haha,Tuesday,0
+badri madhusudhan,26 heartlands,Monday,0
+baba baba,baba,Tuesday,320
+baba tunde,26 heartland,Tuesday,234
+john david,wyndham central,Monday,450

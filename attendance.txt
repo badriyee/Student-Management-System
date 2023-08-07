@@ -1,0 +1,2 @@
+baba,tunde,Tuesday
+john,david,Monday
