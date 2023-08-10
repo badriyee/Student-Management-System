@@ -1,2 +1,3 @@
-baba,tunde,234
-john,david,450
+john,david,230, 450
+Amrinder,Saggu,200, 450
+jack,roll,400,50

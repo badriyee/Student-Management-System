@@ -5,6 +5,8 @@ import os
 import re
 from tkinter import ttk
 
+
+
 # Initiate main tkinter window
 root = tk.Tk()
 root.geometry('440x440')
@@ -36,126 +38,138 @@ if os.path.exists('students.txt'):
                 continue  # Skip lines with an unexpected number of values
             students[f"{firstname} {lastname}"] = (address, training_day, payment_made)
 
+attendances = {}
+if os.path.exists('attendance.txt'):
+    with open('attendance.txt', 'r') as f:
+        for line in f:
+            data = line.strip().split(',')
+            if len(data) == 4:
+                firstname, lastname, week_number, status = data
+            else:
+                continue  # Skip lines with an unexpected number of values
+            attendances[f"{firstname} {lastname} {week_number}"] = (status)
 
 
 
-def attendance(day):
-    payment_frame = Frame(root, bg = 'red')
-    payment_frame.pack()
-    
-    
-    
-   
+print(students)
 
-def payment():
-    payment_frame = Frame(root, bg = 'red')
-    payment_frame.pack()
-    
-   
-    Fonts_tuple = ('Helvetica', 50, 'bold') 
-    welcome_label = tk.Label(payment_frame, text='Welcome, \nCoach!', bg = 'red', fg= 'black' ,font = Fonts_tuple)
-    
-     #login_label.grid(row=1, column =0, columnspan=2, pady = 40 )
-    welcome_label.grid(row = 10, column= 150, pady = 10)
-def attendance_days():
-    def switch_to_attendance(day):
-        days_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        attendance(day)
-    def exit(): 
-        messagebox.showinfo(title='Signed Out', message = 'successfully exited')
-        days_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        go_to_homescreen()
-    days_frame = Frame(root, bg='red')
-    days_frame.pack()
-    welcome_frame = Frame(root, bg= 'red')
-    welcome_frame.pack()
-    bottom_frame = Frame(root, bg= 'red')
-    bottom_frame.pack(side='bottom')
-        
-    Fonts_tuple = ('Helvetica', 15, 'bold') 
-    days_label = tk.Label(days_frame, text='Select Training Day!', bg = 'red', fg= 'black' ,font = Fonts_tuple)
-    day1_button = tk.Button(welcome_frame,command = switch_to_attendance(day='monday'),text = 'Monday', bg = 'black', fg = 'red', font = Fonts_tuple )
-    day2_button = tk.Button(welcome_frame, text='Tuesday', command = switch_to_attendance, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    day3_button = tk.Button(welcome_frame,command = switch_to_attendance,text = 'Wednesday', bg = 'black', fg = 'red', font = Fonts_tuple )
-    day4_button = tk.Button(welcome_frame, text='Thursday', command = switch_to_attendance, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    day5_button = tk.Button(welcome_frame, text='Friday', command = switch_to_attendance, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    exit_button = tk.Button(bottom_frame, command = exit, text = 'Exit', bg = 'black', fg = 'red', font= Fonts_tuple)
 
-    days_label.pack()
-    day1_button.grid(row = 4, column= 10,  pady= 15)
-    day2_button.grid(row = 5, column= 10, pady=5)
-    day3_button.grid(row = 6, column= 10, pady= 5)
-    day4_button.grid(row = 7, column= 10, pady=5)
-    day5_button.grid(row = 8, column= 10, pady= 5)
+
     
-    exit_button.grid(row = 20, column= 50, pady = 100)
     
 
 
-def payment_days():
-    def switch_to_payment(day):
-        days_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        payment(day)
-    def exit(): 
-        messagebox.showinfo(title='Signged Out', message = 'successfully exited')
-        days_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        go_to_homescreen()
-
-    days_frame = Frame(root, bg='red')
-    days_frame.pack()
-    welcome_frame = Frame(root, bg= 'red')
-    welcome_frame.pack()
-    bottom_frame = Frame(root, bg= 'red')
-    bottom_frame.pack(side='bottom')
-        
-    Fonts_tuple = ('Helvetica', 25, 'bold') 
-    days_label = tk.Label(days_frame, text='Select Training Day!', bg = 'red', fg= 'black' ,font = Fonts_tuple)
-    day1_button = tk.Button(welcome_frame,command = switch_to_payment,text = 'Monday', bg = 'black', fg = 'red', font = Fonts_tuple )
-    day2_button = tk.Button(welcome_frame, text='Tuesday', command = switch_to_payment, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    day3_button = tk.Button(welcome_frame,command = switch_to_payment,text = 'Wednesday', bg = 'black', fg = 'red', font = Fonts_tuple )
-    day4_button = tk.Button(welcome_frame, text='Thursday', command = switch_to_payment, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    day5_button = tk.Button(welcome_frame, text='Friday', command = switch_to_payment, bg = 'black', fg = 'red' ,font = Fonts_tuple)
-    exit_button = tk.Button(bottom_frame, command = exit, text = 'Exit', bg = 'black', fg = 'red', font= Fonts_tuple)
-
-    days_label.pack()
-    day1_button.grid(row = 4, column= 10,  pady= 15)
-    day2_button.grid(row = 5, column= 10, pady=5)
-    day3_button.grid(row = 6, column= 10, pady= 5)
-    day4_button.grid(row = 7, column= 10, pady=5)
-    day5_button.grid(row = 8, column= 10, pady= 5)
-    
-    exit_button.grid(row = 20, column= 50, pady = 100)
-    
 
 
 def go_to_homescreen():
     def exit(): 
-        messagebox.showinfo(title='Signged Out', message = 'successfully exited')
+        messagebox.showinfo(title='Signed Out', message = 'successfully exited')
         home_frame.destroy()
         welcome_frame.destroy()
         bottom_frame.destroy()
         login_screen()
+    def attendance_register():
+        attendance = tk.Toplevel(root)
+        attendance.geometry('500x500')
+        attendance.title("Mark Attendance")
+        def mark_attendance():
+            
+            firstname = firstname_entry.get()
+            lastname = lastname_entry.get()
+            week_number = week_number_entry.get()
+            status = status_entry.get()
+            key = f'{firstname} {lastname} {week_number}'
     
-    def switch_to_attendances():
-        home_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        attendance_days()
-        
+            if key not in attendances:
+                messagebox.showinfo(title='Error', message = 'Student not found')
+            else:
+                with open('attendance.txt', 'r') as f:
+                    lines = f.readlines()
+                with open('attendance.txt', 'w') as f:
+                    for line in lines:
+                        if line.startswith(f'{firstname},{lastname},{week_number}'):
+                            f.write(f'{firstname},{lastname},{week_number},{status}\n')
+                        else:
+                            f.write(line)
+                messagebox.showinfo(title='Success', message = 'Attendance has been saved.')
+                attendance.destroy()
+        firstname_label = Label(attendance, text="First Name", width=20, font=("bold", 10))
+        firstname_entry = Entry(attendance)
+        lastname_label = Label(attendance, text="Last Name", width=20, font=("bold", 10))
+        lastname_entry = Entry(attendance)
+        week_number_label = Label(attendance, text="Week", width=20, font=("bold", 10))
+        week_number_entry = ttk.Combobox(attendance, 
+                                        values=[
+                                            '1', 
+                                            '2',
+                                            '3',
+                                            '4',
+                                            '5',
+                                            '6',
+                                            '7',
+                                            '8',
+                                            '9',
+                                            '10'])
+        status_label = Label(attendance, text="Present/Absent", width=20, font=("bold", 10))
+        status_entry = Entry(attendance)
+        submit_button = Button(attendance, text='Submit', width=20, bg='brown', fg='white', command=mark_attendance)
+   
 
-    def switch_to_payments():
-        home_frame.destroy()
-        welcome_frame.destroy()
-        bottom_frame.destroy()
-        payment_days()
+        firstname_label.pack(pady=10)
+        firstname_entry.pack(pady=10)
+        lastname_label.pack(pady=10)
+        lastname_entry.pack(pady=10)
+        week_number_label.pack(pady=10)
+        week_number_entry.pack(pady=10)   
+        status_label.pack(pady=10)
+        status_entry.pack(pady=10)
+        submit_button.pack(pady=20)       
+    def payment_manager():
+        payment = tk.Toplevel(root) 
+        payment.geometry('500x500')
+        payment.title("Manage Payment")
+        def update_payment():
+            firstname = firstname_entry.get()
+            lastname = lastname_entry.get()
+            additional = additional_entry.get()
+
+            key = f'{firstname} {lastname}'
+            payment_made = students[key][2]
+            if key not in students:
+                messagebox.showinfo(title='Error', message = 'Student not found')
+            else:
+
+                payment_made = int(payment_made) + int(additional)
+                outstanding = 450 - int(payment_made)
+                with open('payment.txt', 'r') as f:
+                    lines = f.readlines()
+                with open('payment.txt', 'w') as f:
+                    for line in lines:
+                        if line.startswith(f'{firstname},{lastname}'):
+                            f.write(f'{firstname},{lastname},{payment_made},{outstanding}\n')
+                        else:
+                            f.write(line)
+                messagebox.showinfo(title='Success', message = f'Payment Updated.\n New Oustanding Amount:${outstanding}')
+                payment.destroy()
+            
+        firstname_label = Label(payment, text="First Name", width=20, font=("bold", 10))
+        firstname_entry = Entry(payment)
+        lastname_label = Label(payment, text="Last Name", width=20, font=("bold", 10))
+        lastname_entry = Entry(payment)
+        additional_label = Label(payment, text="Additional Payment", width=20, font=("bold", 10))
+        additional_entry = Entry(payment)  
+        submit_button = Button(payment, text='Submit', command = update_payment, width=20, bg='brown', fg='white',)
+ 
+
+        firstname_label.pack(pady=10)
+        firstname_entry.pack(pady=10)
+        lastname_label.pack(pady=10)
+        lastname_entry.pack(pady=10)
+ 
+        additional_label.pack(pady=10)
+        additional_entry.pack(pady=10)
+        submit_button.pack(pady=20) 
+
     def manage_students():
         base = tk.Toplevel(root)
         base.geometry('500x500')  
@@ -168,14 +182,17 @@ def go_to_homescreen():
             payment_made = payment_made_entry.get()
 
             if firstname and lastname and address and training_day and payment_made:
-                students[f"{firstname} {lastname}"] = (address, training_day, payment_made)
+                key = f"{firstname} {lastname}"
+                students[key] = (address, training_day, payment_made)
                 with open('students.txt', 'a') as f:
                     f.write(f'{firstname},{lastname},{address},{training_day},{payment_made}\n')
                 with open('attendance.txt', 'a') as f:
-                    f.write(f'{firstname},{lastname},{training_day}\n')
+                    for i in range(1, 11):
+                        f.write(f'{firstname},{lastname},{i},present/absent\n')
 
                 with open('payment.txt', 'a') as f:
-                     f.write(f'{firstname},{lastname},{payment_made}\n')
+                     outstanding = 450 - int(payment_made)
+                     f.write(f'{firstname},{lastname},{payment_made}, {outstanding}\n')
                 messagebox.showinfo(title='Success', message = 'Student details have been saved.')
                 base.destroy()
 
@@ -219,7 +236,7 @@ def go_to_homescreen():
             firstname = firstname_entry.get()
             lastname = lastname_entry.get()
 
-            key = f"{firstname} {lastname}"
+            key = f'{firstname} {lastname}'
 
             if key not in students:
                 messagebox.showinfo(title='Remove Failed', message = 'Student not found')
@@ -228,23 +245,23 @@ def go_to_homescreen():
                 with open('students.txt', 'w') as f:
                     for name, details in students.items():
                         f.write(f'{name},{",".join(details)}\n')
-                # Update attendance.txt
+                        
+        # Update attendance.txt
                 with open('attendance.txt', 'r') as f:
                     lines = f.readlines()
                 with open('attendance.txt', 'w') as f:
                     for line in lines:
                         if not line.startswith(f'{firstname},{lastname}'):
                             f.write(line)
-                # Update payment.txt
+        # Update payment.txt
                 with open('payment.txt', 'r') as f:
                     lines = f.readlines()
                 with open('payment.txt', 'w') as f:
                     for line in lines:
                         if not line.startswith(f'{firstname},{lastname}'):
-                            f.write(line)
+                             f.write(line)
                 messagebox.showinfo(title='Success', message = 'Student details have been removed.')
                 base.destroy()
-
         # existing code for setting up labels and entries
 
         remove_button = Button(base, text='Remove', width=20, bg='brown', fg='white', command=remove)
@@ -270,33 +287,22 @@ def go_to_homescreen():
             new_training_day = new_training_day_entry.get()
             #new_payment_made = new_payment_made_entry.get()
 
-            key = f"{firstname}, {lastname}"
+            key = f'{firstname} {lastname}'
+            
 
             if key not in students:
                 messagebox.showinfo(title='Update Failed', message = 'Student not found')
             else:
-                students[key] = (new_address, new_training_day)
+                students[key] = (new_address, new_training_day,students[key][2])
+                with open('students.txt', 'r') as f:
+                    lines = f.readlines()
                 with open('students.txt', 'w') as f:
-                    for name, details in students.items():
-                        f.write(f'{name},{",".join(details)}\n')
-                # Update attendance.txt
-                with open('attendance.txt', 'r') as f:
-                    lines = f.readlines()
-                with open('attendance.txt', 'w') as f:
                     for line in lines:
                         if line.startswith(f'{firstname},{lastname}'):
-                            f.write(f'{firstname},{lastname},{new_training_day}\n')
+                            f.write(f'{firstname}, {lastname},{new_address},{new_training_day},{students[key][2]}\n')
                         else:
                             f.write(line)
-                # Update payment.txt
-                with open('payment.txt', 'r') as f:
-                    lines = f.readlines()
-                with open('payment.txt', 'w') as f:
-                    for line in lines:
-                        if line.startswith(f'{firstname},{lastname}'):
-                            f.write(f'{firstname},{lastname}\n')
-                        else:
-                            f.write(line)
+                
                 messagebox.showinfo(title='Success', message = 'Student details have been updated.')
                 base.destroy()
 
@@ -341,8 +347,8 @@ def go_to_homescreen():
     Font_tuple = ("Helvetica", 20, "bold")   
     Fonts_tuple = ('Helvetica', 15, 'bold') 
     welcome_label = tk.Label(welcome_frame, text='Welcome, \nCoach!', bg = 'red', fg= 'black' ,font = Fonts_tuple)
-    attendance_button = tk.Button(home_frame,command = switch_to_attendances,text = 'Attendance', bg = 'black', fg = 'red', font = Font_tuple )
-    payment_button = tk.Button(home_frame, text='Payment', command = switch_to_payments, bg = 'black', fg = 'red' ,font = Font_tuple)
+    attendance_button = tk.Button(home_frame,text = 'Attendance', command= attendance_register, bg = 'black', fg = 'red', font = Fonts_tuple )
+    payment_button = tk.Button(home_frame, text='Payment', command=payment_manager, bg = 'black', fg = 'red' ,font = Font_tuple)
     add_button = tk.Button(home_frame, text='Add Students', command = manage_students, bg = 'black', fg = 'red' ,font = Fonts_tuple)
     remove_button = tk.Button(home_frame, text='Remove Students', command = remove_student , bg = 'black', fg = 'red' ,font = Fonts_tuple)
     update_button = tk.Button(home_frame, text='Update Students', command = update_student , bg = 'black', fg = 'red' ,font = Fonts_tuple)
@@ -359,9 +365,9 @@ def go_to_homescreen():
 
 # Function for user registration
 def registration():
-    base = tk.Toplevel(root)
-    base.geometry('500x500')  
-    base.title("Registration Form")  
+    register = tk.Toplevel(root)
+    register.geometry('500x500')  
+    register.title("Registration Form")  
 
     def submit_registration():
         username = username_entry.get()
@@ -384,17 +390,17 @@ def registration():
             with open(user_file, 'a') as f:
                 f.write(f'{username},{email},{password}\n')
             messagebox.showinfo(title='Registration Success', message = 'You have successfully registered. You can now log in with your credentials.')
-            base.destroy()
+            register.destroy()
 
-    username_label = Label(base, text="Username", width=20, font=("bold", 10))
-    username_entry = Entry(base)
-    email_label = Label(base, text="Email", width=20, font=("bold", 10))
-    email_entry = Entry(base)
-    password_label = Label(base, text="Password", width=20, font=("bold", 10))
-    password_entry = Entry(base, show='*')
-    confirm_password_label = Label(base, text="Confirm Password", width=20, font=("bold", 10))
-    confirm_password_entry = Entry(base, show='*')
-    submit_button = Button(base, text='Submit', width=20, bg='brown', fg='white', command=submit_registration)
+    username_label = Label(register, text="Username", width=20, font=("bold", 10))
+    username_entry = Entry(register)
+    email_label = Label(register, text="Email", width=20, font=("bold", 10))
+    email_entry = Entry(register)
+    password_label = Label(register, text="Password", width=20, font=("bold", 10))
+    password_entry = Entry(register, show='*')
+    confirm_password_label = Label(register, text="Confirm Password", width=20, font=("bold", 10))
+    confirm_password_entry = Entry(register, show='*')
+    submit_button = Button(register, text='Submit', width=20, bg='brown', fg='white', command=submit_registration)
 
     username_label.pack(pady=10)
     username_entry.pack(pady=10)
@@ -436,7 +442,7 @@ def login_screen():
     login_button.pack(pady=20)
     register_button.pack(pady=10)
 
-# Function for the homescreen
+
 
 login_screen()
 root.mainloop()
