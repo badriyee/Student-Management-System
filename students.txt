@@ -1,5 +1,12 @@
-badri  mad 22 hound street,Monday,200,0
-john,david,26 heartlands,Wednesday,230
-Amrinder, Saggu,36 hound street,Wednesday,200
-jack,roll,26 heartlands blvd,Wednesday,200
-isagi,yoichi,blue lock,Monday,200
+Badri,M,10 CHutya Lane,Friday,100
+John,G,26 chutiya venue,Wednesday,10
+John,G,26 chutiya venue,Wednesday,10
+John,G,26 chutiya venue,Wednesday,10
+John,G,26 chutiya venue,Wednesday,10
+John,G,26 chutiya venue,Wednesday,10
+john,b,fdfd,Wednesday,100
+baba,b,kuyfegfil,Tuesday,200
+lmao,m,wkugfur,Friday,100
+jack,s,3 burger lane,Wednesday,100
+manu,m,dhfd,Tuesday,100
+ami,s,jdcda,Tuesday,200

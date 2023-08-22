@@ -1,3 +1,11 @@
-john,david,230, 450
-Amrinder,Saggu,200, 450
-jack,roll,400,50
+Badri,M,100, 170
+John,G,10, 305
+John,G,10, 305
+John,G,10, 305
+John,G,10, 305
+John,G,10, 305
+john,b,130,95
+baba,b,200, -65
+lmao,m,100, 170
+manu,m,100, 35
+ami,s,200, 205
